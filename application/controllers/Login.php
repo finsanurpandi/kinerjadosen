@@ -84,7 +84,8 @@ class Login extends CI_Controller {
             $user_account = array (
               'login_in' => TRUE,
               'npm' => $user,
-              'pic' => $pic
+              'pic' => $pic,
+              'role' => '1'
             );
 
             // $data = array(
@@ -176,7 +177,8 @@ class Login extends CI_Controller {
               'login_in' => TRUE,
               'user' => $user,
               'pic' => $pic,
-              'kdprodi' => $userlogin[0]['prodi']
+              'kdprodi' => $userlogin[0]['prodi'],
+              'role' => '0'
             );
 
             $data = array(

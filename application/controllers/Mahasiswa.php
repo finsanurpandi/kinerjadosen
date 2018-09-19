@@ -8,11 +8,11 @@ class Mahasiswa extends CI_Controller {
         parent::__construct();
         $this->load->model('m_basic');
 
-        // $this->session->set_userdata('pic', 'plankton.jpg');
-        // $this->session->set_userdata('npm', '5520116003');
-        // $this->session->set_userdata('login_in', 'TRUE');
+        $this->session->set_userdata('pic', 'plankton.jpg');
+        $this->session->set_userdata('npm', '5520116003');
+        $this->session->set_userdata('login_in', 'TRUE');
 
-        if ($this->session->login_in == FALSE) {
+        if ($this->session->login_in == FALSE && $this->session->role !== '1') {
             redirect('login/mahasiswa', 'refresh');
         }
     }
@@ -34,7 +34,7 @@ class Mahasiswa extends CI_Controller {
 
     function check_login()
     {
-        if ($this->session->login_in == FALSE) {
+        if ($this->session->login_in == FALSE && $this->session->role !== '1') {
             redirect('login/mahasiswa', 'refresh');
         }
     }
@@ -50,7 +50,7 @@ class Mahasiswa extends CI_Controller {
         // } else {
         //     $this->session->set_userdata('npm', '5520115099');
         // }
-        //$this->check_login();
+        // $this->check_login();
 
         $setting = $this->m_basic->getAllData('rft_konfigurasi')->result_array();
         $krs = $this->m_basic->getKrs($this->session->npm, $setting[0]['kd_semester']);

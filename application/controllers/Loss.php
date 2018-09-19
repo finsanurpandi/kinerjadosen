@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mahasiswa extends CI_Controller {
+class Loss extends CI_Controller {
 
 	function __construct()
     {
@@ -9,7 +9,7 @@ class Mahasiswa extends CI_Controller {
         $this->load->model('m_basic');
 
         $this->session->set_userdata('pic', 'plankton.jpg');
-        $this->session->set_userdata('npm', '5520116003');
+        $this->session->set_userdata('npm', '000');
         $this->session->set_userdata('login_in', 'TRUE');
 
         // if ($this->session->login_in == FALSE) {
@@ -68,7 +68,7 @@ class Mahasiswa extends CI_Controller {
         $data['krs'] = $krs;
         $data['setting'] = $setting[0];
         $data['penilaian'] = $penilaian;
-        $data['mhs'] = $mhs[0];
+        $data['mhs'] = @$mhs[0];
         $data['kelas'] = $kelas;
         $data['matakuliah'] = $matakuliah;
 
@@ -82,7 +82,7 @@ class Mahasiswa extends CI_Controller {
             $this->m_basic->insertData('fn_status_penilaian', $input);
         }
 
-        $this->load_view('kd_mahasiswa/data_mahasiswa', $data);
+        $this->load_view('kd_mahasiswa/data_mahasiswa_loss', $data);
 
         // add class
         $addclass = $this->input->post('addClass');

@@ -9,7 +9,7 @@ class Prodi extends CI_Controller {
         $this->load->model('m_basic');
         // $this->session->set_userdata('kdprodi','55201');
 
-        if ($this->session->login_in == FALSE) {
+        if ($this->session->login_in == FALSE && $this->session->role !== '0') {
             redirect('login/prodi', 'refresh');
         }
     }
@@ -137,6 +137,7 @@ class Prodi extends CI_Controller {
         $jadwal = $this->m_basic->getJadwal($setting[0]['kd_semester'])->result_array();
         $dosen = $this->m_basic->getAllData('dosen')->result_array();
         $kdprodi = $this->m_basic->getAllData('prodi')->result_array();
+        $matkul = $this->m_basic->getAllData('rft_matakuliah', array('rft_kdprodi' => $this->session->kdprodi))->result_array();
 
         // print_r($jadwal);
 
@@ -160,6 +161,7 @@ class Prodi extends CI_Controller {
         $data['jadwal'] = $jadwal;
         $data['dosen'] = $dosen;
         $data['kdprodi'] = $kdprodi;
+        $data['matkul'] = $matkul;
 
         $this->load_view('kd_prodi/jadwal', $data);
 
@@ -187,6 +189,7 @@ class Prodi extends CI_Controller {
             $this->session->set_flashdata('success', true);
 
             redirect($this->uri->uri_string());
+            //print_r($data);
         }
     }
 

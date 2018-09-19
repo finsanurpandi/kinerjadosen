@@ -118,6 +118,10 @@
   }
 ?> 
 
+<?php
+    if ($this->session->kdprodi == '22201') {
+?>
+
 <div class='alert alert-info'>Teknik Sipil</div>
 <?php
 
@@ -146,6 +150,8 @@
             $head = 0;
         }
     }
+
+} elseif ($this->session->kdprodi == '26201') {
 
 ?>
 <div class='alert alert-info'>Teknik Industri</div>
@@ -177,6 +183,8 @@
         }
     }
 
+} elseif ($this->session->kdprodi == '55201') {
+
 ?>
 <div class='alert alert-info'>Teknik Informatika</div>
 <?php
@@ -206,7 +214,7 @@
             $head = 0;
         }
     }
-
+}
 ?>
 
 
@@ -234,7 +242,7 @@
       </div>
       <div class="modal-body">
         <form method="post">
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label>Kode Prodi</label>
                 <select name="kdprodi" class="form-control" id="kdprodi" onchange="getMatkul();" required>
                     <option></option>
@@ -242,11 +250,22 @@
                     <option value="26201">Teknik Industri</option>
                     <option value="55201">Teknik Informatika</option>
                 </select>
-            </div>
+            </div> -->
+            <!-- <div class="form-group">
+                <label>Kode - Nama Matakuliah</label>
+                <select name="matakuliah" id="matkul" class="form-control select-add-jadwal" style="width:100%;" required>
+                    <option></option>
+                </select>
+            </div> -->
             <div class="form-group">
                 <label>Kode - Nama Matakuliah</label>
                 <select name="matakuliah" id="matkul" class="form-control select-add-jadwal" style="width:100%;" required>
                     <option></option>
+                <?php
+                foreach ($matkul as $key => $value) {
+                    echo "<option value='".$value['rft_kode_matakuliah'].",".$value['rft_nama_matakuliah'].",".$value['rft_smtr']."'>".$value['rft_kode_matakuliah']."-".$value['rft_nama_matakuliah']."</option>";
+                }   
+                ?>
                 </select>
             </div>
             <div class="form-group">
@@ -281,7 +300,7 @@
             </div>
             <div class="form-group">
                 <label>Hari</label>
-                <select name="hari" class="form-control select-add-jadwal" style="width:100%" required>
+                <select name="hari" class="form-control select-add-jadwal" style="width:100%" >
                     <option></option>
                     <option value="senin">Senin</option>
                     <option value="selasa">Selasa</option>
@@ -293,7 +312,7 @@
             </div>
             <div class="form-group">
                 <label>Waktu</label>
-                <input type="text" name="waktu" class="form-control" placeholder="hh.mm-hh.mm" required/>
+                <input type="text" name="waktu" class="form-control" placeholder="hh.mm-hh.mm" />
             </div>
             <div class="form-group">
                 <label>Ruangan</label>
