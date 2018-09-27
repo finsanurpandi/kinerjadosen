@@ -1,6 +1,7 @@
 
   <?php
-    $nilai = array(1,2,3,4,5);
+    // $nilai = array(1,2,3,4,5);
+    $nilai = array(1 => "Sangat Kurang",2 => "Kurang",3 => "Cukup",4 => "Baik",5 => "Sangat Baik");
 
     function getSemester($str)
     {
@@ -93,10 +94,10 @@ for ($i=0; $i < count($aspek); $i++) {
         <td>
 <?php
             
-    foreach ($nilai as $row) {
+    foreach ($nilai as $row => $vlue) {
 ?>
             <label class="radio-inline">
-                <input type="radio" name="nilai[<?=$j?>]" value="<?=$row?>" required><?=$row?>
+                <input type="radio" name="nilai[<?=$j?>]" value="<?=$row?>" required><?=$vlue?>
             </label>
 <?php } ?>
         </td>

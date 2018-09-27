@@ -8,9 +8,9 @@ class Mahasiswa extends CI_Controller {
         parent::__construct();
         $this->load->model('m_basic');
 
-        $this->session->set_userdata('pic', 'plankton.jpg');
-        $this->session->set_userdata('npm', '5520116003');
-        $this->session->set_userdata('login_in', 'TRUE');
+        // $this->session->set_userdata('pic', 'plankton.jpg');
+        // $this->session->set_userdata('npm', '5520115099');
+        // $this->session->set_userdata('login_in', 'TRUE');
 
         if ($this->session->login_in == FALSE && $this->session->role !== '1') {
             redirect('login/mahasiswa', 'refresh');
