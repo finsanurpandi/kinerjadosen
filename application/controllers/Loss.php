@@ -34,6 +34,11 @@ class Loss extends CI_Controller {
 	function index()
 	{
         //$this->session->set_userdata('npm', '000');
+        // setting session
+        $npm_session = $this->session->npm;
+        if (!isset($npm_session)) {
+            $this->session->set_userdata('npm', '000');
+        }
         
         //add npm
         $npm = $this->input->post('npm');
@@ -41,7 +46,8 @@ class Loss extends CI_Controller {
         {
             $this->session->set_userdata('npm', $npm);
         } 
-        
+
+        print($this->session->npm);
         $this->check_login();
         $setting = $this->m_basic->getAllData('rft_konfigurasi')->result_array();
         $krs = $this->m_basic->getKrs($this->session->npm, $setting[0]['kd_semester']);
