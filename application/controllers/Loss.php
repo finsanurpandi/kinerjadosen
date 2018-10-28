@@ -47,7 +47,6 @@ class Loss extends CI_Controller {
             $this->session->set_userdata('npm', $npm);
         } 
 
-        print($this->session->npm);
         $this->check_login();
         $setting = $this->m_basic->getAllData('rft_konfigurasi')->result_array();
         $krs = $this->m_basic->getKrs($this->session->npm, $setting[0]['kd_semester']);
