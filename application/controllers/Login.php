@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Login extends CI_Controller {
-
 	function __construct()
     {
         parent::__construct();
@@ -10,12 +8,10 @@ class Login extends CI_Controller {
         //$this->session->set_userdata('login_in', 'FALSE');
         // $this->session->sess_destroy();
     }
-
     function index()
     {
         
     }
-
 	public function mahasiswa()
 	{
         
@@ -24,10 +20,8 @@ class Login extends CI_Controller {
         } else {
             redirect('mahasiswa', 'refresh');
         }
-
         $rand = rand(1,5);
         $pic = '';
-
         switch ($rand) {
             case 1:
                 $pic = 'spongebob.jpg';
@@ -48,19 +42,15 @@ class Login extends CI_Controller {
         
         
         $login = $this->input->post('login');
-
 		if (isset($login)) {
 			$user = $this->input->post('npm');
 			$pass = $this->input->post('pass');
-
 			// check user
 			$count = $this->m_basic->getNumRows('tlogin', array('npm' => $user, 'pass' => md5($pass)));
-
 			//set date
 			date_default_timezone_set("Asia/Bangkok");
 			$date = new DateTime();
 			$lastlogin = $date->format('Y-m-d H:i:s');
-
 			//check device
 			// if ($this->agent->is_browser())
 			// {
@@ -78,35 +68,27 @@ class Login extends CI_Controller {
 			// {
 			//     $agent = 'Unidentified User Agent';
 			// }
-
 			if ($count == 1) {
-
             $user_account = array (
               'login_in' => TRUE,
               'npm' => $user,
               'pic' => $pic,
               'role' => '1'
             );
-
             // $data = array(
             //   'last_login' => $lastlogin,
             //   'device' => $agent
             // );
-
             $this->session->set_userdata($user_account);
             //$this->m_basic->updateData('user', $data, array('user' => $user));
-
             redirect('mahasiswa', 'refresh');
 				
 			} else {
-
 				$this->session->set_flashdata('error', true);
 				redirect('login/mahasiswa','refresh');
-
 			}
 		}
     }
-
     public function prodi()
 	{
         
@@ -115,10 +97,8 @@ class Login extends CI_Controller {
         } else {
             redirect('prodi', 'refresh');
         }
-
         $rand = rand(1,5);
         $pic = '';
-
         switch ($rand) {
             case 1:
                 $pic = 'spongebob.jpg';
@@ -139,20 +119,16 @@ class Login extends CI_Controller {
         
         
         $login = $this->input->post('login');
-
 		if (isset($login)) {
 			$user = $this->input->post('user');
 			$pass = $this->input->post('pass');
-
 			// check user
             $count = $this->m_basic->getNumRows('fn_login', array('user' => $user, 'pass' => sha1($pass)));
             $userlogin = $this->m_basic->getAllData('fn_login', array('user' => $user))->result_array();
-
 			//set date
 			date_default_timezone_set("Asia/Bangkok");
 			$date = new DateTime();
 			$lastlogin = $date->format('Y-m-d H:i:s');
-
 			//check device
 			if ($this->agent->is_browser())
 			{
@@ -170,9 +146,7 @@ class Login extends CI_Controller {
 			{
 			    $agent = 'Unidentified User Agent';
 			}
-
 			if ($count == 1) {
-
             $user_account = array (
               'login_in' => TRUE,
               'user' => $user,
@@ -180,22 +154,17 @@ class Login extends CI_Controller {
               'kdprodi' => $userlogin[0]['prodi'],
               'role' => '0'
             );
-
             $data = array(
               'last_login' => $lastlogin,
               'device' => $agent
             );
-
             $this->session->set_userdata($user_account);
             $this->m_basic->updateData('fn_login', $data, array('user' => $user));
-
             redirect('prodi', 'refresh');
 				
 			} else {
-
 				$this->session->set_flashdata('error', true);
 				redirect('login/prodi','refresh');
-
 			}
 		}
     }
@@ -203,7 +172,6 @@ class Login extends CI_Controller {
     function logout($user)
     {
         $this->session->sess_destroy();
-
         if ($user == 'mahasiswa') {
             redirect('login/mahasiswa', 'refresh');
         } else {

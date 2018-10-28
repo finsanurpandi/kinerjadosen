@@ -55,6 +55,11 @@
             <li id="prodiUraianKinerja"><a href="<?=base_url()?>prodi/uraian"><i class="fa fa-circle-o"></i> Uraian Kinerja Dosen</a></li>
           </ul>
         </li>
+        <!-- <li id="prodiInput">
+        <a href="<?=base_url()?>loss">
+          <i class="fa fa-th"></i> <span>Input Penilaian</span>
+        </a>
+      </li> -->
         <li>
         <a href="#" data-toggle="modal" data-target="#logoutModal">
           <i class="fa fa-th"></i> <span>Logout</span>
@@ -96,6 +101,7 @@
     $('#prodiUraian').remove('.active');
     $('#prodiKategori').remove('.active');
     $('#prodiUraianKinerja').remove('.active');
+    $('#prodiInput').remove('.active');
   }
 
 	if (uri == '') {
@@ -113,5 +119,7 @@
 		} else if (uri == 'uraian') {
             $('#prodiUraian').addClass('active');
             $('#prodiUraianKinerja').addClass('active');
-		};
+		} else if (uri == 'loss') {
+            $('#prodiInput').addClass('active');
+    }
 </script>
