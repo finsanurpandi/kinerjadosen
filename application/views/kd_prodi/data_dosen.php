@@ -21,9 +21,7 @@
         <!-- <small>it all starts here</small> -->
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Blank page</li>
+        <li class="active"><i class="fa fa-dashboard"></i> Penilaian Kinerja Dosen</li>
       </ol>
     </section>
 
@@ -50,6 +48,8 @@
         </select>
   </div>
 </form>
+<hr/>
+<a href="<?=base_url()?>Cetak/cetak_rekap_semua_dosen/<?=$semester.'/'.$this->session->kdprodi.'/'.$this->encrypt->encode($setting['rft_tahun_ajaran']).'/'.getSemester($setting['kd_semester'])?>" target="_blank" class="btn btn-primary btn-xs">Cetak</a>
 <hr/>
 
 <table class="table table-hover">

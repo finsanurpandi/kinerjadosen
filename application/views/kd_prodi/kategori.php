@@ -9,8 +9,7 @@
         <!-- <small>it all starts here</small> -->
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?=base_url()?>kd_prodi"><i class="fa fa-dashboard"></i> Kategori Penilaian</a></li>
-        <li class="active">Penilaian</li>
+        <li class="active"><i class="fa fa-dashboard"></i> Kategori Penilaian</li>
       </ol>
     </section>
 

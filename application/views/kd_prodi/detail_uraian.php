@@ -21,9 +21,9 @@
         <small>Tahun Akademik <?=$setting['rft_tahun_ajaran']?> Semester <?=getSemester($setting['semester'])?></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Blank page</li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> Penilaian Kinerja Dosen</a></li>
+        <li><a href="#"><?=$dosen[0]['nama'].', '.$dosen[0]['jengped']?></a></li>
+        <li class="active">Detail</li>
       </ol>
     </section>
 

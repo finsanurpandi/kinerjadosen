@@ -60,6 +60,7 @@ class Prodi extends CI_Controller {
     }
     function detail_penilaian($nidn, $kdprodi)
     {
+
         $nidn = $this->encrypt->decode($nidn);
         $kdprodi = $this->encrypt->decode($kdprodi);
         $setting = $this->m_basic->getAllData('rft_konfigurasi')->result_array();

@@ -29,9 +29,8 @@
         <small>Tahun Akademik <?=$setting['rft_tahun_ajaran']?> Semester <?=getSemester($setting['semester'])?></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Blank page</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Penilaian Kinerja Dosen</a></li>
+        <li class="active"><?=$dosen[0]['nama'].', '.$dosen[0]['jengped']?></li>
       </ol>
     </section>
 
@@ -135,6 +134,8 @@
     </tbody>
     </thead>
 </table>
+<hr/>
+<a href="<?=base_url()?>Cetak/cetak_rekap_dosen/<?=$this->encrypt->encode($dosen[0]['NIDN'])?>/<?=$this->encrypt->encode($semester)?>/<?=$this->encrypt->encode($this->session->kdprodi)?>/<?=$this->encrypt->encode($setting['rft_tahun_ajaran'])?>/<?=$this->encrypt->encode(getSemester($setting['kd_semester']))?>" class='btn btn-primary btn-xs' target='_blank'>cetak semua</a>
 <hr/>
 <a href="<?=base_url()?>prodi" class="btn btn-default btn-xs"><i class="fa fa-arrow-left"></i> kembali</a>
 <!-- end content           -->

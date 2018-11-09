@@ -52,4 +52,43 @@ class Cetak extends CI_Controller {
         $this->load->view('kd_cetak/cetak_penilaian', $data);
     }
 
+    function cetak_rekap_semua_dosen($semester, $kdprodi, $thn_ajaran, $smtr)
+    {
+        $thn_ajaran = $this->encrypt->decode($thn_ajaran);
+
+        $allscore = $this->m_basic->getAllScore($semester, $kdprodi);
+        $prodi = $this->m_basic->getAllData('prodi', array('KodeProdi' => $kdprodi))->result_array();
+
+        $data['allscore'] = $allscore;
+        $data['semester'] = $semester;
+        $data['kdprodi'] = $kdprodi;
+        $data['thn_ajaran'] = $thn_ajaran;
+        $data['smtr'] = $smtr;
+        $data['prodi'] = $prodi;
+
+        $this->load->view('kd_cetak/cetak_rekap_semua_dosen', $data);
+    }
+
+    function cetak_rekap_dosen($nidn, $semester, $kdprodi, $thn_ajaran, $smtr)
+    {
+        $nidn = $this->encrypt->decode($nidn);
+        $semester = $this->encrypt->decode($semester);
+        $kdprodi = $this->encrypt->decode($kdprodi);
+        $thn_ajaran = $this->encrypt->decode($thn_ajaran);
+        $smtr = $this->encrypt->decode($smtr);
+
+        $matkul = $this->m_basic->getPersonScore($nidn, $semester, $kdprodi);
+        $prodi = $this->m_basic->getAllData('prodi', array('KodeProdi' => $kdprodi))->result_array();
+        $dosen = $this->m_basic->getAllData('dosen', array('nidn' => $nidn))->result_array();
+
+        $data['matkul'] = $matkul;
+        $data['kdprodi'] = $kdprodi;
+        $data['thn_ajaran'] = $thn_ajaran;
+        $data['smtr'] = $smtr;
+        $data['prodi'] = $prodi;
+        $data['dosen'] = $dosen;
+
+        $this->load->view('kd_cetak/cetak_rekap_dosen', $data);
+    }
+
 }
