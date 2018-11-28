@@ -93,7 +93,7 @@ class Login extends CI_Controller {
         if (isset($sentEmail)) {
             $config = Array(
                 'protocol' => 'smtp',
-                'smtp_host' => 'smtp.googlemail.com',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
                 'smtp_port' => 465,
                 'smtp_user' => 'no.reply.evdos@gmail.com', // change it to yours
                 'smtp_pass' => 'xdzpujqosvhjbehs', // change it to yours,
