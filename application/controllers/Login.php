@@ -87,7 +87,46 @@ class Login extends CI_Controller {
 				$this->session->set_flashdata('error', true);
 				redirect('login/mahasiswa','refresh');
 			}
-		}
+        }
+        
+        $sentEmail = $this->input->post('kirimEmail');
+        if (isset($sentEmail)) {
+            $config = Array(
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_port' => 465,
+                'smtp_user' => 'no.reply.evdos@gmail.com', // change it to yours
+                'smtp_pass' => 'xdzpujqosvhjbehs', // change it to yours,
+                'smtp_timeout' => '7',
+                'mailtype' => 'html',
+                'charset' => 'iso-8859-1',
+                'wordwrap' => TRUE,
+                'newline' => "\r\n"
+              );
+            $from_email = "no.reply.evdos@gmail.com"; 
+            $to_email = $this->input->post('email'); 
+            $npm = $this->input->post('npm');
+            $enknpm = $this->encrypt->encode($npm);
+              
+            $this->load->library('email');
+            $this->email->initialize($config);
+
+            $this->email->from($from_email, 'Evaluasi Dosen Fakultas Teknik'); 
+            $this->email->to($to_email);
+            $this->email->subject('Reset Password'); 
+            $bodyMessage = "Silahkan akses link di bawah ini untuk mengganti password anda. <br/><br/>";
+            $bodyMessage .= base_url()."login/reset_password/".$enknpm;
+            $bodyMessage .= "<br/><br/>Terima kasih.";
+            $this->email->message($bodyMessage); 
+    
+            //Send mail 
+            if($this->email->send()) 
+                $this->session->set_flashdata("email_sent","Email sent successfully."); 
+            else 
+            // $this->session->set_flashdata("email_sent","Error in sending Email."); 
+            // redirect($this->uri->uri_string());
+            show_error($this->email->print_debugger());
+        }
     }
     public function prodi()
 	{
@@ -178,5 +217,22 @@ class Login extends CI_Controller {
             redirect('login/prodi', 'refresh');
         }
 		
+    }
+
+    function reset_password($npm)
+    {
+        $npm = $this->encrypt->decode($npm);
+        $this->load->view('reset_password');
+        $kirim = $this->input->post('kirim');
+        if (isset($kirim)) {
+            $data = array(
+                'pass' => md5($this->input->post('pass'))
+            );
+
+            $where = array('npm' => $npm);
+            $this->m_basic->updateData('tlogin', $data, $where);
+            $this->session->set_flashdata('update', true);
+            redirect($this->uri->uri_string());
+        }
     }
 }

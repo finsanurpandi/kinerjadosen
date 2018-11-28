@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Evaluasi Dosen | Mahasiswa</title>
+  <title>Reset Password | Mahasiswa</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -28,84 +28,56 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <style>
+      .login-box-body{
+          width: 600px;
+          margin:-100px;
+      }
+    </style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Penilaian Kinerja</b>Dosen</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+<?php
+if (@$this->session->flashdata('update') !== true) {
+?>
+    <p class="login-box-msg"><strong>Masukan password baru anda.</strong></p>
 
     <form method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="NPM" name="npm" required>
+        <input type="password" class="form-control" placeholder="Password Baru" name="pass" required>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" name="pass" required>
+        <input type="password" class="form-control" placeholder="Konfirmasi Password" name="cpass" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
-      <?php
-        if (@$this->session->flashdata('error') == true) {
-      ?>
-      <small class="text-danger">
-        Wrong Username or Password!!!
-      </small>
-
-      <?php
-        }
-      ?>
-<br/>
+<p class="text-muted text-center">Perubahan password ini tidak akan mempengaruhi password untuk mengakses Sistem Informasi Akademik</p>
       <div class="row">
         <div class="col-xs-8">
-          <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalLogin">Tidak bisa login?</button>
+          
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" name="login" class="btn btn-primary btn-block btn-flat">Login</button>
+          <button type="submit" name="kirim" class="btn btn-primary btn-block btn-flat">Ganti Password</button>
         </div>
         <!-- /.col -->
       </div>
     </form>
-
+<?php } else {
+?>
+<p class="text-muted text-center">Password anda telah berhasil kami ubah. Silahkan melakukan login dengan memilih tombol login di bawah ini.</p>
+<div class="text-center">
+    <a href="<?=base_url()?>login/mahasiswa" class="btn btn-primary btn-lg">LOGIN</a>
+</div>
+<?php } ?>
   </div>
   <!-- /.login-box-body -->
 </div>
 <!-- /.login-box -->
-
-<!-- Modal -->
-<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Form Reset Password</h4>
-      </div>
-      <div class="modal-body">
-        <p>Kami akan mengirimkan link untuk reset password ke email anda. Password baru hanya berlaku untuk Sistem Evaluasi Dosen, tidak berlaku untuk login perwalian.</p>
-        <p>Terima kasih.</p>
-        <hr/>
-        <form method="post">
-          <div class="form-group">
-            <label for="exampleInputEmail1">NPM</label>
-            <input type="number" name="npm" class="form-control" placeholder="Masukan NPM anda.">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Alamat Email</label>
-            <input type="email" name="email" class="form-control" placeholder="Masukan email anda.">
-          </div>
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Tutup</button>
-        <button type="submit" class="btn btn-primary btn-xs" name="kirimEmail">Kirim</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 <!-- jQuery 3 -->
