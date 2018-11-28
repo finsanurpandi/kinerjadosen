@@ -108,8 +108,8 @@ class Login extends CI_Controller {
             $npm = $this->input->post('npm');
             $enknpm = $this->encrypt->encode($npm);
               
-            $this->load->library('email');
-            $this->email->initialize($config);
+            $this->load->library('email', $config);
+            //$this->email->initialize($config);
 
             $this->email->from($from_email, 'Evaluasi Dosen Fakultas Teknik'); 
             $this->email->to($to_email);
