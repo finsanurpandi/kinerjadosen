@@ -120,12 +120,13 @@ class Login extends CI_Controller {
             $this->email->message($bodyMessage); 
     
             //Send mail 
-            if($this->email->send()) 
+            if($this->email->send()){
                 $this->session->set_flashdata("email_sent","Email sent successfully."); 
-            else 
+            } else {
             // $this->session->set_flashdata("email_sent","Error in sending Email."); 
             // redirect($this->uri->uri_string());
             show_error($this->email->print_debugger());
+            }
         }
     }
     public function prodi()
