@@ -1,7 +1,8 @@
 
   <?php
     // $nilai = array(1,2,3,4,5);
-    $nilai = array(1 => "Sangat Kurang",2 => "Kurang",3 => "Cukup",4 => "Baik",5 => "Sangat Baik");
+    // $nilai = array(1 => "Sangat Kurang",2 => "Kurang",3 => "Cukup",4 => "Baik",5 => "Sangat Baik");
+    $nilai = array(5 => "Sangat Baik", 4 => "Baik", 3 => "Cukup", 2 => "Kurang", 1 => "Sangat Kurang");
 
     function getSemester($str)
     {

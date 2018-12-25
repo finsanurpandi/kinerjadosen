@@ -60,7 +60,7 @@
 <br/>
       <div class="row">
         <div class="col-xs-8">
-          <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalLogin">Tidak bisa login?</button>
+          <!-- <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalLogin">Tidak bisa login?</button> -->
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
@@ -90,11 +90,11 @@
         <form method="post">
           <div class="form-group">
             <label for="exampleInputEmail1">NPM</label>
-            <input type="number" name="npm" class="form-control" placeholder="Masukan NPM anda.">
+            <input type="number" name="npm" class="form-control" placeholder="Masukan NPM anda." required>
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Alamat Email</label>
-            <input type="email" name="email" class="form-control" placeholder="Masukan email anda.">
+            <input type="email" name="email" class="form-control" placeholder="Masukan email anda." required>
           </div>
         
       </div>

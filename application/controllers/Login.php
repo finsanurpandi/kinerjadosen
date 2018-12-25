@@ -111,7 +111,7 @@ class Login extends CI_Controller {
             $this->load->library('email', $config);
             //$this->email->initialize($config);
 
-            $this->email->from($from_email, 'Evaluasi Dosen Fakultas Teknik'); 
+            $this->email->from($from_email, '[no-reply]Evaluasi Dosen Fakultas Teknik'); 
             $this->email->to($to_email);
             $this->email->subject('Reset Password'); 
             $bodyMessage = "Silahkan akses link di bawah ini untuk mengganti password anda. <br/><br/>";
