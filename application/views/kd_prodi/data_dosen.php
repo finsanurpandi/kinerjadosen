@@ -51,7 +51,44 @@
 <hr/>
 <a href="<?=base_url()?>Cetak/cetak_rekap_semua_dosen/<?=$semester.'/'.$this->session->kdprodi.'/'.$this->encrypt->encode($setting['rft_tahun_ajaran']).'/'.getSemester($setting['kd_semester'])?>" target="_blank" class="btn btn-primary btn-xs">Cetak</a>
 <hr/>
-
+<p>Total mahasiswa yang telah mengisi kinerja dosen sebanyak <strong><?=$totalMhs[0]['total']?></strong> orang</p>
+<hr/>
+<h4>Standar Penilaian Kinerja Dosen</h4>
+<div class="row">
+  <div class="col-md-4">
+  <table class="table table-striped">
+      <thead>
+          <tr>
+                <th>Rerata Skor</th>
+                <th>Klasifikasi Kinerja Dosen</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+                <td>>4.00</th>
+                <td>Sangat Baik</td>
+          </tr>
+          <tr>
+                <td>>3.00 - <4.00</th>
+                <td>Baik</td>
+          </tr>
+          <tr>
+                <td>>2.00 - <3.00</td>
+                <td>Cukup</td>
+          </tr>
+          <tr>
+                <td>>1.00 - <2.00</th>
+                <td>Kurang</td>
+          </tr>
+          <tr>
+                <td><1.00</th>
+                <td>Sangat Kurang</td>
+          </tr>
+      </tbody>
+  </table>
+  </div>
+</div>
+<hr/>
 <table class="table table-hover">
         <thead>
             <tr>

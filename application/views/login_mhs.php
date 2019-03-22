@@ -1,3 +1,9 @@
+<?php
+  $bg = array('bg_img_03.jpeg', 'bg_img_01.jpg', 'bg_img_02.jpg', 'bg_img_04.jpg');
+  $rand = array_rand($bg);
+
+  $fix = base_url()."assets/img/".$bg[$rand];
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +24,8 @@
   <link rel="stylesheet" href="<?=base_url()?>assets//css/AdminLTE.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="<?=base_url()?>assets/plugins/iCheck/square/blue.css">
+  <!-- Viga font -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -28,15 +36,71 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <style>
+    .login-page{
+      background-image: url("<?=$fix?>");
+      background-size: cover;
+      height: 100%;
+      overflow: hidden;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+    .login-logo{
+      background: #fff;
+    }
+
+    .login-box{
+      margin: 15% auto;
+    }
+
+    @media only screen and (min-width: 600px){
+      .modal {
+        text-align: center;
+        padding: 0!important;
+      }
+
+      .modal:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -4px;
+      }
+
+      .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+      }
+    }
+    
+
+    .year {
+      font-family: 'Poppins', sans-serif;
+      font-size: '20vw';
+      font-weight: bold;
+      text-transform: uppercase;
+      background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Penilaian Kinerja</b>Dosen</a>
+    <!-- <a href="../../index2.html"><b>Penilaian Kinerja</b>Dosen</a> -->
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <div class="text-center">
+    <a href="http://www.unsur.ac.id" target="_blank" title="Universitas Suryakancana"><img src="<?=base_url()?>assets/img/logo_unsur.png" width="50px"/></a>
+    <a href="http://ft.unsur.ac.id" target="_blank" title="Fakultas Teknik"><img src="<?=base_url()?>assets/img/logo_ft.png" width="50px"/></a>
+    <hr/>
+    </div>
+    <p class="login-box-msg">
+    Silahkan login untuk mulai melakukan penilaian kinerja dosen.
+    </p>
 
     <form method="post">
       <div class="form-group has-feedback">
@@ -69,9 +133,13 @@
         <!-- /.col -->
       </div>
     </form>
-
+    <hr/>
+    <div class="text-center">
+    Copyright &copy; 2017 Fakultas Teknik <br/>Universitas Suryakancana
+    </div>
   </div>
   <!-- /.login-box-body -->
+  
 </div>
 <!-- /.login-box -->
 
@@ -108,6 +176,30 @@
 </div>
 
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="text-center">
+          <p style="font-size:22px">Selamat Tahun Baru</p>
+          <h1 class="year" style="font-size:200px">2019</h1>
+          <hr/>
+          <p style="font-size:15px">Apa resolusimu tahun ini? sudah siap menggapainya?</p>
+          <p style="font-size:15px">Sebelum itu, silakan untuk mengisi penilaian kinerja dosen untuk semester gasal tahun akademik 2018/2019</p>
+          <p style="font-size:20px">Semoga tahun ini menjadi lebih baik dari sebelumnya.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="text-center">
+          <button type="button" class="btn btn-primary btn-xs" data-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-- jQuery 3 -->
 <script src="<?=base_url()?>assets/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -115,5 +207,19 @@
 <!-- iCheck -->
 <script src="<?=base_url()?>assets/plugins/iCheck/icheck.min.js"></script>
 
+<script>
+$(document).ready(function(){
+  $tahun = "<?=$setting['kd_semester']?>";
+  if ($tahun == '20181') {
+    $('#myModal').modal({
+      show: true
+    })
+  }
+});
+</script>
+
+
 </body>
 </html>
+
+

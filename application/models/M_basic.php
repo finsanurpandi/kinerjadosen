@@ -214,7 +214,7 @@ class M_basic extends CI_Model {
 		JOIN fn_jadwal ON rft_tkrs.rft_kode_matakuliah = fn_jadwal.rft_kode_matakuliah AND rft_tkrs.rft_kelas = fn_jadwal.rft_kelas
 		LEFT OUTER JOIN dosen ON fn_jadwal.rft_nidn = dosen.NIDN 
 		LEFT JOIN (SELECT DISTINCT kode_matkul FROM fn_penilaian WHERE npm = sha1('".$npm."') AND semester = '".$semester."') fn_penilaian ON rft_tkrs.rft_kode_matakuliah = fn_penilaian.kode_matkul 
-		WHERE rft_tkrs.rft_npm = '".$npm."' AND fn_jadwal.rft_nama_matakuliah != 'KKN' AND rft_tkrs.rft_semester = '".$semester."'";
+		WHERE rft_tkrs.rft_npm = '".$npm."' AND fn_jadwal.rft_nama_matakuliah != 'KKN' AND rft_tkrs.rft_semester = '".$semester."' AND fn_jadwal.rft_nama_matakuliah != 'Seminar TA'";
 
 		$query = $this->db->query($sql);
 
@@ -311,7 +311,7 @@ class M_basic extends CI_Model {
 
 	function getJadwalProdiGanjil($semester, $kdprodi)
 	{
-		$sql = "SELECT rft_matakuliah.rft_kdprodi, fn_jadwal.rft_kode_matakuliah, fn_jadwal.rft_nama_matakuliah, fn_jadwal.rft_kelas, fn_jadwal.rft_nidn, dosen.jengped, fn_jadwal.rft_nama_dosen, rft_matakuliah.rft_sks, fn_jadwal.rft_hari, fn_jadwal.rft_waktu, fn_jadwal.rft_ruang, fn_jadwal.rft_semester, rft_matakuliah.rft_smtr FROM fn_jadwal JOIN rft_matakuliah ON fn_jadwal.rft_kode_matakuliah = rft_matakuliah.rft_kode_matakuliah JOIN dosen ON fn_jadwal.rft_nidn = dosen.NIDN WHERE fn_jadwal.rft_semester = '".$semester."' AND rft_matakuliah.rft_kdprodi='".$kdprodi."' AND rft_matakuliah.rft_semester = 'Genap'";
+		$sql = "SELECT rft_matakuliah.rft_kdprodi, fn_jadwal.rft_kode_matakuliah, fn_jadwal.rft_nama_matakuliah, fn_jadwal.rft_kelas, fn_jadwal.rft_nidn, dosen.jengped, fn_jadwal.rft_nama_dosen, rft_matakuliah.rft_sks, fn_jadwal.rft_hari, fn_jadwal.rft_waktu, fn_jadwal.rft_ruang, fn_jadwal.rft_semester, rft_matakuliah.rft_smtr FROM fn_jadwal JOIN rft_matakuliah ON fn_jadwal.rft_kode_matakuliah = rft_matakuliah.rft_kode_matakuliah JOIN dosen ON fn_jadwal.rft_nidn = dosen.NIDN WHERE fn_jadwal.rft_semester = '".$semester."' AND rft_matakuliah.rft_kdprodi='".$kdprodi."' AND rft_matakuliah.rft_semester = 'Ganjil'";
 
 		$query = $this->db->query($sql);
 
@@ -327,6 +327,14 @@ class M_basic extends CI_Model {
 		return $query;
 	}
 
+	function getAllJadwal($semester, $kdprodi)
+	{
+		$sql = "SELECT fn_jadwal.*, rft_matakuliah.rft_kdprodi FROM `fn_jadwal` LEFT JOIN rft_matakuliah ON fn_jadwal.rft_kode_matakuliah = rft_matakuliah.rft_kode_matakuliah WHERE fn_jadwal.rft_semester = '".$semester."' AND rft_matakuliah.rft_kdprodi = '".$kdprodi."'";
+		$query = $this->db->query($sql);
+
+		return $query;
+	}
+
 	function getMahasiswa($semester, $kdprodi = null)
 	{
 		$sql = "SELECT DISTINCT(rft_tkrs.rft_npm), tlogin.nama, tlogin.angkatan, tlogin.kelas FROM `rft_tkrs` JOIN tlogin ON rft_tkrs.rft_npm = tlogin.npm WHERE rft_tkrs.rft_semester = '".$semester."' AND rft_tkrs.rft_npm LIKE '".$kdprodi."%'";
@@ -336,9 +344,9 @@ class M_basic extends CI_Model {
 		return $query;
 	}
 
-	function getDetailKelasMhs($npm)
+	function getDetailKelasMhs($npm, $semester)
 	{
-		$sql = "SELECT rft_tkrs.rft_npm, rft_tkrs.rft_kode_matakuliah, rft_matakuliah.rft_nama_matakuliah, rft_tkrs.rft_sks, rft_tkrs.rft_semester, rft_tkrs.smtr, rft_tkrs.rft_thn_ajar, rft_tkrs.rft_kelas FROM `rft_tkrs` JOIN rft_matakuliah ON rft_tkrs.rft_kode_matakuliah = rft_matakuliah.rft_kode_matakuliah WHERE rft_npm = '".$npm."'";
+		$sql = "SELECT rft_tkrs.rft_npm, rft_tkrs.rft_kode_matakuliah, rft_matakuliah.rft_nama_matakuliah, rft_tkrs.rft_sks, rft_tkrs.rft_semester, rft_tkrs.smtr, rft_tkrs.rft_thn_ajar, rft_tkrs.rft_kelas FROM `rft_tkrs` JOIN rft_matakuliah ON rft_tkrs.rft_kode_matakuliah = rft_matakuliah.rft_kode_matakuliah WHERE rft_npm = '".$npm."' AND rft_tkrs.rft_semester = '".$semester."'";
 
 		$query = $this->db->query($sql);
 
@@ -357,6 +365,15 @@ class M_basic extends CI_Model {
 	function getMatakuliahKrs($npm, $semester)
 	{
 		$sql = "SELECT rft_tkrs.id, rft_tkrs.rft_kode_matakuliah, rft_matakuliah.rft_nama_matakuliah, rft_tkrs.rft_sks FROM rft_tkrs JOIN rft_matakuliah ON rft_tkrs.rft_kode_matakuliah = rft_matakuliah.rft_kode_matakuliah WHERE rft_tkrs.rft_npm = '".$npm."' AND rft_tkrs.rft_semester = '".$semester."'";
+
+		$query = $this->db->query($sql);
+
+		return $query;
+	}
+
+	function getTotalMahasiswa($kdprodi, $semester)
+	{
+		$sql = "SELECT semester, COUNT(npm) as 'total' FROM `fn_status_penilaian` WHERE npm LIKE '".$kdprodi."%' AND semester = '".$semester."'";
 
 		$query = $this->db->query($sql);
 

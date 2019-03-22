@@ -51,9 +51,9 @@
     }
 
     $ruang = array(
-        'FT-1.1', 'FT-1.2', 'FT-1.3', 'FT-1.4',
-        'FT-2.1', 'FT-2.2', 'FT-2.3', 'FT-2.4',
-        'FT-3.1'
+        'IF-1.1', 'IF-1.2', 'IF-1.3', 'IF-1.4',
+        'IF-2.1', 'IF-2.2', 'IF-2.3', 'IF-2.4',
+        'IF-3.1'
     );
 
     $kelas = array(0 => 'A', 1 => 'B', 2 => 'C', 3 => 'D', 4 => 'E');
@@ -216,7 +216,7 @@ for ($i=0; $i < count($jadwal); $i++) {
                 echo "<strong>Kelas E</strong>";
             }
 
-            echo "<table class='table table-bordered table-striped'>";
+            echo "<table class='table table-striped'>";
             echo "<tr>";
             echo "<th>#</th>";
             echo "<th>Kode</th>";
@@ -232,13 +232,13 @@ for ($i=0; $i < count($jadwal); $i++) {
                 echo "<td>".$jadwal[$i][$j][$k]['kode']."</td>";
                 echo "<td>".$jadwal[$i][$j][$k]['nama']."</td>";
                 echo "<td>".$jadwal[$i][$j][$k]['dosen']."</td>";
-                echo "<td>".ucfirst($jadwal[$i][$j][$k]['hari'])."</td>";
+                echo "<td>".$jadwal[$i][$j][$k]['hari']."</td>";
                 echo "<td>".$jadwal[$i][$j][$k]['waktu']."</td>";
                 echo "<td>".$jadwal[$i][$j][$k]['ruang']."</td>";
                 echo "</tr>";
             }
             echo "</table>";
-            echo "<hr/>";
+            echo "<br/>";
         }
 
 

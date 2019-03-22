@@ -95,6 +95,9 @@ window.setTimeout(function() {
     $(".alert.alert-danger").fadeTo(500, 0).slideUp(500, function(){
         $(this).remove();
     });
+    $(".alert.alert-warning").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove();
+    });
 }, 3000);
 
 

@@ -30,4 +30,25 @@ class Ajax extends CI_Controller {
         $this->m_basic->updateData('rft_tkrs', $data, array('rft_npm' => $npm, 'rft_kode_matakuliah' => $this->input->post('kdmatkul')));
     }
 
+    function setsemester($semester, $pass=null)
+    {
+        if ($pass == 'finsa' && $pass !== null) {
+            $isYear = substr($semester,0,4);
+            $isTa = $isYear.'/'.++$isYear;
+
+            $data = array(
+                'semester' => $semester,
+                'rft_tahun_ajaran' => $isTa,
+                'kd_semester' => $semester,
+                'kd_tahun_akademik' => $isTa
+            );
+
+            $this->m_basic->updateData('rft_konfigurasi', $data, array('id' => '1'));
+            redirect(base_url(), 'refresh');
+        } else {
+            $this->output->set_output("This is an AJAX endpoint!");
+        }
+        
+    }
+
 }

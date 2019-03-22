@@ -51,9 +51,9 @@
     }
 
     $ruang = array(
-        'FT-1.1', 'FT-1.2', 'FT-1.3', 'FT-1.4',
-        'FT-2.1', 'FT-2.2', 'FT-2.3', 'FT-2.4',
-        'FT-3.1'
+        'IF-1.1', 'IF-1.2', 'IF-1.3', 'IF-1.4',
+        'IF-2.1', 'IF-2.2', 'IF-2.3', 'IF-2.4',
+        'IF-3.1'
     );
 
     $kelas = array(0 => 'A', 1 => 'B', 2 => 'C', 3 => 'D', 4 => 'E');
@@ -67,9 +67,9 @@
 
     $thnsemester = array();
 
-    // for ($i=0; $i < count($if); $i++) { 
-    //     $thnsemester[$i] = getYear($if[$i]['rft_smtr'],$setting['semester']);
-    // }
+    for ($i=0; $i < count($if); $i++) { 
+        $thnsemester[$i] = getYear($if[$i]['rft_smtr'],$setting['semester']);
+    }
 
   ?>
 
@@ -120,135 +120,98 @@
     if ($this->session->kdprodi == '22201') {
 ?>
 
-
+<div class='alert alert-info'>Teknik Sipil</div>
 <?php
 
-$thn = substr($setting['kd_semester'],0,4);
-    
-for ($i=0; $i < count($jadwal); $i++) { 
-    $num = 1;
-    echo "<div class='alert alert-info'>SI ".$thn."</div>";
-    echo "<table class='table table-striped'>";
-    echo "<tr>";
-    echo "<th>#</th>";
-    echo "<th>Kode</th>";
-    echo "<th>Matakuliah</th>";
-    echo "<th>Dosen</th>";
-    echo "<th>Hari</th>";
-    echo "<th>Waktu</th>";
-    echo "<th>Ruang</th>";
-    echo "</tr>";
-    for ($j=0; $j < count($jadwal[$i][0]); $j++) { 
-        echo "<tr>";
-        echo "<td>".$num++."</td>";
-        echo "<td>".$jadwal[$i][0][$j]['kode']."</td>";
-        echo "<td>".$jadwal[$i][0][$j]['nama']."</td>";
-        echo "<td>".$jadwal[$i][0][$j]['dosen']."</td>";
-        echo "<td>".$jadwal[$i][0][$j]['hari']."</td>";
-        echo "<td>".$jadwal[$i][0][$j]['waktu']."</td>";
-        echo "<td>".$jadwal[$i][0][$j]['ruang']."</td>";
-        echo "</tr>";
+    for ($i=0; $i < count($tahun); $i++) { 
+        for ($j=0; $j < 1; $j++) { 
+            $head = 0;
+            echo "<ul class='list-group'>";
+            
+            for ($k=0; $k < count($si); $k++) { 
+                
+                if ($tahun[$i] == $thnsemester[$k] && $si[$k]['rft_kelas'] == 'A') {
+                    if ($head == 0) {
+                        echo "<li class='list-group-item active'>";
+                        echo "IF-A-".$tahun[$i]. '<br/>';
+                        echo "</li>";
+                        $head += 1;
+                    }
+                        echo "<li class='list-group-item'>";
+                        echo $si[$k]['rft_kode_matakuliah']." - ".$si[$k]['rft_nama_matakuliah']." - <strong>".$si[$k]['rft_nama_dosen'].", ".$si[$k]['jengped']."</strong> || ".ucwords($si[$k]['rft_hari']).", ".$si[$k]['rft_waktu'].", Ruang ".$si[$k]['rft_ruang'];
+                        echo "<span class='pull-right'><button class='btn btn-success btn-xs' type='button'><i class='fa fa-pencil'></i></button>&nbsp;";
+                        echo "<button class='btn btn-danger btn-xs' type='button'><i class='fa fa-trash-o'></i></button></span>";
+                        echo "</li>";
+                }
+                echo "</ul>";
+            }
+            $head = 0;
+        }
     }
-    echo "</table>";
-    echo "<br/>";
-    $thn -= 1;
-}
 
 } elseif ($this->session->kdprodi == '26201') {
 
 ?>
-
+<div class='alert alert-info'>Teknik Industri</div>
 <?php
-    $thn = substr($setting['kd_semester'],0,4);
-    
-    for ($i=0; $i < count($jadwal); $i++) { 
-        $num = 1;
-        echo "<div class='alert alert-info'>TI ".$thn."</div>";
-        echo "<table class='table table-striped'>";
-        echo "<tr>";
-        echo "<th>#</th>";
-        echo "<th>Kode</th>";
-        echo "<th>Matakuliah</th>";
-        echo "<th>Dosen</th>";
-        echo "<th>Hari</th>";
-        echo "<th>Waktu</th>";
-        echo "<th>Ruang</th>";
-        echo "</tr>";
-        for ($j=0; $j < count($jadwal[$i][0]); $j++) { 
-            echo "<tr>";
-            echo "<td>".$num++."</td>";
-            echo "<td>".$jadwal[$i][0][$j]['kode']."</td>";
-            echo "<td>".$jadwal[$i][0][$j]['nama']."</td>";
-            echo "<td>".$jadwal[$i][0][$j]['dosen']."</td>";
-            echo "<td>".$jadwal[$i][0][$j]['hari']."</td>";
-            echo "<td>".$jadwal[$i][0][$j]['waktu']."</td>";
-            echo "<td>".$jadwal[$i][0][$j]['ruang']."</td>";
-            echo "</tr>";
+
+    for ($i=0; $i < count($tahun); $i++) { 
+        for ($j=0; $j < 1; $j++) { 
+            $head = 0;
+            echo "<ul class='list-group'>";
+            
+            for ($k=0; $k < count($ti); $k++) { 
+                
+                if ($tahun[$i] == $thnsemester[$k] && $ti[$k]['rft_kelas'] == 'A') {
+                    if ($head == 0) {
+                        echo "<li class='list-group-item active'>";
+                        echo "IF-A-".$tahun[$i]. '<br/>';
+                        echo "</li>";
+                        $head += 1;
+                    }
+                        echo "<li class='list-group-item'>";
+                        echo $ti[$k]['rft_kode_matakuliah']." - ".$ti[$k]['rft_nama_matakuliah']." - <strong>".$ti[$k]['rft_nama_dosen'].", ".$ti[$k]['jengped']."</strong> || ".ucwords($ti[$k]['rft_hari']).", ".$ti[$k]['rft_waktu'].", Ruang ".$ti[$k]['rft_ruang'];
+                        echo "<span class='pull-right'><button class='btn btn-success btn-xs' type='button'><i class='fa fa-pencil'></i></button>&nbsp;";
+                        echo "<button class='btn btn-danger btn-xs' type='button'><i class='fa fa-trash-o'></i></button></span>";
+                        echo "</li>";
+                }
+                echo "</ul>";
+            }
+            $head = 0;
         }
-        echo "</table>";
-        echo "<br/>";
-        $thn -= 1;
     }
 
 } elseif ($this->session->kdprodi == '55201') {
-    // echo "<pre>";
-    // print_r($jadwal);
-    // echo "</pre>";
 
-    // echo count($jadwal[1][0]);
-    $thn = substr($setting['kd_semester'],0,4);
-
-    for ($i=0; $i < count($jadwal); $i++) { 
-        
-        echo "<div class='alert alert-info'>IF ".$thn."</div>";
-
-        for ($j=0; $j < count(@$jadwal[$i]); $j++) { 
-            $num = 1;
-            if ($j == 0) {
-                echo "<strong>Kelas A</strong>";
-            } elseif ($j == 1) {
-                echo "<strong>Kelas B</strong>";
-            } elseif ($j == 2) {
-                echo "<strong>Kelas C</strong>";
-            } elseif ($j == 3) {
-                echo "<strong>Kelas D</strong>";
-            } elseif ($j == 4) {
-                echo "<strong>Kelas E</strong>";
-            }
-
-            echo "<table class='table table-bordered table-striped'>";
-            echo "<tr>";
-            echo "<th>#</th>";
-            echo "<th>Kode</th>";
-            echo "<th>Matakuliah</th>";
-            echo "<th>Dosen</th>";
-            echo "<th>Hari</th>";
-            echo "<th>Waktu</th>";
-            echo "<th>Ruang</th>";
-            echo "</tr>";
-            for ($k=0; $k < count(@$jadwal[$i][$j]); $k++) { 
-                echo "<tr>";
-                echo "<td>".$num++."</td>";
-                echo "<td>".$jadwal[$i][$j][$k]['kode']."</td>";
-                echo "<td>".$jadwal[$i][$j][$k]['nama']."</td>";
-                echo "<td>".$jadwal[$i][$j][$k]['dosen']."</td>";
-                echo "<td>".ucfirst($jadwal[$i][$j][$k]['hari'])."</td>";
-                echo "<td>".$jadwal[$i][$j][$k]['waktu']."</td>";
-                echo "<td>".$jadwal[$i][$j][$k]['ruang']."</td>";
-                echo "</tr>";
-            }
-            echo "</table>";
-            echo "<hr/>";
-        }
-
-
-        
-        $thn -= 1;
-    }
 ?>
+<div class='alert alert-info'>Teknik Informatika</div>
 <?php
 
-    
+    for ($i=0; $i < count($tahun); $i++) { 
+        for ($j=0; $j < count($kelas); $j++) { 
+            $head = 0;
+            echo "<ul class='list-group'>";
+            
+            for ($k=0; $k < count($if); $k++) { 
+                
+                if ($tahun[$i] == $thnsemester[$k] && $kelas[$j] == $if[$k]['rft_kelas']) {
+                    if ($head == 0) {
+                        echo "<li class='list-group-item active'>";
+                        echo "IF-".$kelas[$j].' '.$tahun[$i]. '<br/>';
+                        echo "</li>";
+                        $head += 1;
+                    }
+                        echo "<li class='list-group-item'>";
+                        echo $if[$k]['rft_kode_matakuliah']." - ".$if[$k]['rft_nama_matakuliah']." - <strong>".$if[$k]['rft_nama_dosen'].", ".$if[$k]['jengped']."</strong> || ".ucwords($if[$k]['rft_hari']).", ".$if[$k]['rft_waktu'].", Ruang ".$if[$k]['rft_ruang'];
+                        echo "<span class='pull-right'><button class='btn btn-success btn-xs' type='button'><i class='fa fa-pencil'></i></button>&nbsp;";
+                        echo "<button class='btn btn-danger btn-xs' type='button'><i class='fa fa-trash-o'></i></button></span>";
+                        echo "</li>";
+                }
+                echo "</ul>";
+            }
+            $head = 0;
+        }
+    }
 }
 ?>
 

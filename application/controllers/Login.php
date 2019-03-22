@@ -16,7 +16,9 @@ class Login extends CI_Controller {
 	{
         
         if ($this->session->login_in == FALSE) {
-            $this->load->view('login_mhs');
+            $setting = $this->m_basic->getAllData('rft_konfigurasi')->result_array();
+            $data['setting'] = $setting[0];
+            $this->load->view('login_mhs', $data);
         } else {
             redirect('mahasiswa', 'refresh');
         }
